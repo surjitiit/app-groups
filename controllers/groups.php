@@ -186,8 +186,8 @@ class Groups extends ClearOS_Controller
 
     function add($group_name)
     {
-        // if (!isset($group_name) && $this->input->post('group_name'))
-        //    $group_name = $this->input->post('group_name');
+        if (!isset($group_name) && $this->input->post('group_name'))
+            $group_name = $this->input->post('group_name');
 
         $this->_handle_item('add', $group_name);
     }
