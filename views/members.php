@@ -48,10 +48,13 @@ if (empty($basename)) {
     $form = $basename . '/policy/edit_members/' . $group_info['group_name'];
 }
 
-if ($mode === 'view')
+if ($mode === 'view') {
     $buttons = array(anchor_cancel($base_app));
-else
+    $read_only = TRUE;
+} else {
     $buttons = array(anchor_cancel($base_app, 'high'), form_submit_update('submit', 'high'));
+    $read_only = FALSE;
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Headers
@@ -84,13 +87,12 @@ foreach ($users as $username => $details) {
 
 echo form_open($form);
 
-// FIXME: implement read_only in theme
 echo list_table(
     $group_info['description'],
     $buttons,
     $headers,
     $items,
-    array('read_only' => TRUE)
+    array('read_only' => $read_only)
 );
 
 echo form_close();
