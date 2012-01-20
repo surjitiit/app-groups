@@ -99,6 +99,17 @@ class Groups extends ClearOS_Controller
             return;
         }
 
+        // Show cache widget if using remote accounts (e.g. AD)
+        //-----------------------------------------------------
+
+        $this->load->module('accounts/cache');
+
+        if ($this->cache->needs_reset()) {
+            $app_name = empty($this->app_name) ? 'groups' :  $this->app_name;
+            $this->cache->widget($app_name);
+            return;
+        }
+
         if (empty($this->app_name))
             $this->index_all();
         else
@@ -134,7 +145,9 @@ class Groups extends ClearOS_Controller
         // Load views
         //-----------
 
-        $this->page->view_form('groups/summary', $data, lang('groups_group_manager'));
+        $options['javascript'] = array(clearos_app_htdocs('accounts') . '/cache.js.php');
+
+        $this->page->view_form('groups/summary', $data, lang('groups_group_manager'), $options);
     }
 
     function index_policy()
@@ -173,7 +186,9 @@ class Groups extends ClearOS_Controller
         // Load views
         //-----------
 
-        $this->page->view_form('groups/policies', $data, lang('groups_group_manager'));
+        $options['javascript'] = array(clearos_app_htdocs('accounts') . '/cache.js.php');
+
+        $this->page->view_form('groups/policies', $data, lang('groups_group_manager'), $options);
     }
 
     /**

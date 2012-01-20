@@ -35,6 +35,7 @@
 
 use \clearos\apps\groups\Group_Engine as Group;
 
+$this->lang->load('accounts');
 $this->lang->load('groups');
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -59,7 +60,6 @@ if ($description_available) {
 ///////////////////////////////////////////////////////////////////////////////
 
 $normal_anchors = array(anchor_add('/app/groups/add'));
-$plugin_anchors = array();
 $windows_anchors = array();
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -69,7 +69,8 @@ $windows_anchors = array();
 foreach ($groups as $group_name => $info) {
 
     if ($mode === 'view') {
-        $normal_anchors = array();
+        $normal_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
+        $windows_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
 
         if ($description_available) {
             $buttons = array(
