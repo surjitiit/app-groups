@@ -59,8 +59,18 @@ if ($description_available) {
 // Anchors 
 ///////////////////////////////////////////////////////////////////////////////
 
-$normal_anchors = array(anchor_add('/app/groups/add'));
-$windows_anchors = array();
+if ($mode === 'edit') {
+    $normal_anchors = array(anchor_add('/app/groups/add'));
+    $windows_anchors = array();
+} else {
+    if ($cache_action) {
+        $normal_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
+        $windows_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
+    } else {
+        $normal_anchors = array();
+        $windows_anchors = array();
+    }
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Normal groups
@@ -69,8 +79,6 @@ $windows_anchors = array();
 foreach ($groups as $group_name => $info) {
 
     if ($mode === 'view') {
-        $normal_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
-        $windows_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
 
         if ($description_available) {
             $buttons = array(

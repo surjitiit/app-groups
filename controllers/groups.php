@@ -124,6 +124,7 @@ class Groups extends ClearOS_Controller
 
         $this->load->factory('groups/Group_Manager_Factory');
         $this->load->factory('accounts/Accounts_Factory');
+        $this->load->library('accounts/Accounts_Configuration');
         $this->lang->load('groups');
 
         // Load view data
@@ -137,6 +138,10 @@ class Groups extends ClearOS_Controller
             else
                 $data['mode'] = 'view';
 
+            if ($this->accounts_configuration->get_driver() == 'active_directory')
+                $data['cache_action'] = TRUE;
+            else
+                $data['cache_action'] = FALSE;
         } catch (Engine_Exception $e) {
             $this->page->view_exception($e);
             return;
