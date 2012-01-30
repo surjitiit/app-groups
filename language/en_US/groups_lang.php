@@ -1,4 +1,5 @@
 <?php
+$lang['groups_tooltip'] = 'Though not explicitly shown here, the allusers group includes all users on the system.';
 
 $lang['groups_app_policies'] = 'App Policies';
 $lang['groups_policy_name'] = 'Policy Name';
