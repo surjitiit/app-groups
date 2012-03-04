@@ -131,7 +131,7 @@ class Groups extends ClearOS_Controller
         //---------------
 
         try {
-            $data['groups'] = $this->group_manager->get_details(Group::TYPE_ALL);
+            $data['groups'] = $this->group_manager->get_details(Group::FILTER_ALL);
 
             if ($this->accounts->get_capability() === Accounts_Engine::CAPABILITY_READ_WRITE)
                 $data['mode'] = 'edit';

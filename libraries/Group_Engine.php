@@ -81,13 +81,26 @@ class Group_Engine extends Engine
     // Group types
     //------------
 
-    const TYPE_BUILTIN = 'builtin';
-    const TYPE_NORMAL = 'normal';
     const TYPE_SYSTEM = 'system';
+    const TYPE_NORMAL = 'normal';
+    const TYPE_BUILTIN = 'builtin';
     const TYPE_WINDOWS = 'windows';
     const TYPE_PLUGIN = 'plugin';
     const TYPE_UNKNOWN = 'unknown';
-    const TYPE_ALL = 'all';
+
+    // Group filters
+    // -------------
+    // When using some API calls, it is handy to filter for only certain types of 
+    // groups.  The following filter flags can be used where applicable.
+
+    const FILTER_SYSTEM = 1;    // System groups
+    const FILTER_NORMAL = 2;    // User-defined groups
+    const FILTER_BUILTIN = 4;   // Builtin groups
+    const FILTER_WINDOWS = 8;   // Windows reserved groups
+    const FILTER_PLUGIN = 16;   // Hidden groups
+
+    const FILTER_DEFAULT = 18;  // Builtin and user defined groups
+    const FILTER_ALL = 31;
 
     ///////////////////////////////////////////////////////////////////////////////
     // V A R I A B L E S
