@@ -112,20 +112,20 @@ foreach ($groups as $group_name => $info) {
     if ($description_available) {
         $item['details'] = array(
             $group_name,
-            $info['description'],
+            $info['core']['description'],
         );
     } else {
         $item['details'] = array(
             $group_name,
-            $info['description'],
+            $info['core']['description'],
         );
     }
 
-    if ($info['type'] === Group::TYPE_NORMAL)
+    if ($info['core']['type'] === Group::TYPE_NORMAL)
         $normal_items[] = $item;
-    else if ($info['type'] === Group::TYPE_PLUGIN)
+    else if ($info['core']['type'] === Group::TYPE_PLUGIN)
         $plugin_items[] = $item;
-    else if ($info['type'] === Group::TYPE_WINDOWS)
+    else if ($info['core']['type'] === Group::TYPE_WINDOWS)
         $windows_items[] = $item;
 }
 

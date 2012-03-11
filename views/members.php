@@ -42,10 +42,10 @@ $this->lang->load('users');
 
 if (empty($basename)) {
     $base_app = '/app/groups';
-    $form = '/groups/edit_members/' . $group_info['group_name'];
+    $form = '/groups/edit_members/' . $group_info['core']['group_name'];
 } else {
     $base_app = '/app/' . $basename . '/policy';
-    $form = $basename . '/policy/edit_members/' . $group_info['group_name'];
+    $form = $basename . '/policy/edit_members/' . $group_info['core']['group_name'];
 }
 
 if ($mode === 'view') {
@@ -72,7 +72,7 @@ $headers = array(
 foreach ($users as $username => $details) {
     $item['title'] = $username;
     $item['name'] = 'users[' . $username . ']';
-    $item['state'] = (in_array($username, $group_info['members'])) ? TRUE : FALSE;
+    $item['state'] = (in_array($username, $group_info['core']['members'])) ? TRUE : FALSE;
     $item['details'] = array(
         $username,
         $details['core']['full_name']
@@ -88,7 +88,7 @@ foreach ($users as $username => $details) {
 echo form_open($form);
 
 echo list_table(
-    $group_info['description'],
+    $group_info['core']['description'],
     $buttons,
     $headers,
     $items,

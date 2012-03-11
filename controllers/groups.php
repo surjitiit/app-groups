@@ -122,10 +122,10 @@ class Groups extends ClearOS_Controller
         // Load libraries
         //---------------
 
+        $this->lang->load('groups');
         $this->load->factory('groups/Group_Manager_Factory');
         $this->load->factory('accounts/Accounts_Factory');
         $this->load->library('accounts/Accounts_Configuration');
-        $this->lang->load('groups');
 
         // Load view data
         //---------------
@@ -327,9 +327,9 @@ class Groups extends ClearOS_Controller
         // Load libraries
         //---------------
 
+        $this->lang->load('groups');
         $this->load->factory('users/User_Manager_Factory');
         $this->load->factory('groups/Group_Factory', $group_name);
-        $this->lang->load('groups');
 
         // Check group policy
         //-------------------
@@ -397,14 +397,25 @@ class Groups extends ClearOS_Controller
         // Load libraries
         //---------------
 
-        $this->load->factory('groups/Group_Factory', $group_name);
         $this->lang->load('groups');
+        $this->load->factory('groups/Group_Factory', $group_name);
+        $this->load->factory('accounts/Accounts_Factory');
 
         // Check group policy
         //-------------------
 
         if (! empty($this->group_list)) {
             throw new Exception('not allowed');
+            $this->page->view_exception($e);
+            return;
+        }
+
+        // Grab info map for validation
+        //-----------------------------
+
+        try {
+            $info_map = $this->group->get_info_map();
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
@@ -420,6 +431,21 @@ class Groups extends ClearOS_Controller
         if ($form_type === 'add')
             $this->form_validation->set_policy('group_name', 'openldap_directory/Group_Driver', 'validate_group_name', TRUE);
 
+
+        // Validate extensions
+        //--------------------
+
+        if (! empty($info_map['extensions'])) {
+            foreach ($info_map['extensions'] as $extension => $parameters) {
+                foreach ($parameters as $key => $details) {
+                    $required = (isset($details['required'])) ? $details['required'] : FALSE;
+                    $full_key = 'group_info[extensions][' . $extension . '][' . $key . ']';
+
+                    $this->form_validation->set_policy($full_key, $details['validator_class'], $details['validator'], $required);
+                }
+            }
+        }
+
         $form_ok = $this->form_validation->run();
 
         // Handle form submit
@@ -427,10 +453,13 @@ class Groups extends ClearOS_Controller
 
         if ($this->input->post('submit') && ($form_ok === TRUE)) {
             try {
+                $group_info = $this->input->post('group_info');
+                $group_info['core']['description'] = $this->input->post('description');
+
                 if ($form_type === 'add')
-                    $this->group->add($this->input->post('description'));
+                    $this->group->add($group_info);
                 else if ($form_type === 'edit')
-                    $this->group->set_description($this->input->post('description'));
+                    $this->group->update($group_info);
 
                 $this->page->set_status_updated();
                 redirect('/groups');
@@ -444,14 +473,18 @@ class Groups extends ClearOS_Controller
         //------------------- 
 
         try {
-            if ($form_type !== 'add')
+            $data['form_type'] = $form_type;
+            $data['info_map'] = $info_map;
+            $data['extensions'] = $this->accounts->get_extensions();
+
+            if ($form_type === 'add')
+                $data['group_info'] = $this->group->get_info_defaults();
+            else
                 $data['group_info'] = $this->group->get_info();
         } catch (Engine_Exception $e) {
             $this->page->view_exception($e);
             return;
         }
-
-        $data['form_type'] = $form_type;
 
         // Load the views
         //---------------

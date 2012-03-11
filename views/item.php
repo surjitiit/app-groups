@@ -33,6 +33,7 @@
 // Load dependencies
 ///////////////////////////////////////////////////////////////////////////////
 
+$this->lang->load('base');
 $this->lang->load('groups');
 $this->lang->load('users');
 
@@ -44,18 +45,18 @@ if ($form_type === 'edit') {
     $description_read_only = FALSE;
     $group_name_read_only = TRUE;
 
-    $form_path = '/groups/edit/' . $group_info['group_name'];
+    $form_path = '/groups/edit/' . $group_info['core']['group_name'];
     $buttons = array(
         form_submit_update('submit'),
-        anchor_custom('/app/groups/edit_members/' . $group_info['group_name'], lang('groups_edit_members'), 'low'),
+        anchor_custom('/app/groups/edit_members/' . $group_info['core']['group_name'], lang('groups_edit_members'), 'low'),
         anchor_cancel('/app/groups/'),
-        anchor_delete('/app/groups/delete/' . $group_info['group_name'])
+        anchor_delete('/app/groups/delete/' . $group_info['core']['group_name'])
     );
 } else if ($form_type === 'view') {
     $description_read_only = TRUE;
     $group_name_read_only = TRUE;
 
-    $form_path = '/groups/view/' . $group_info['group_name'];
+    $form_path = '/groups/view/' . $group_info['core']['group_name'];
     $buttons = array(
         anchor_cancel('/app/groups/')
     );
@@ -77,8 +78,70 @@ if ($form_type === 'edit') {
 echo form_open($form_path);
 echo form_header(lang('groups_group'));
 
-echo field_input('group_name', $group_info['group_name'], lang('groups_group_name'), $group_name_read_only);
-echo field_input('description', $group_info['description'], lang('groups_description'), $description_read_only);
+echo fieldset_header(lang('base_settings'));
+echo field_input('group_name', $group_info['core']['group_name'], lang('groups_group_name'), $group_name_read_only);
+echo field_input('description', $group_info['core']['description'], lang('groups_description'), $description_read_only);
+echo fieldset_footer();
+
+///////////////////////////////////////////////////////////////////////////////
+// Extensions
+///////////////////////////////////////////////////////////////////////////////
+
+foreach ($info_map['extensions'] as $extension => $parameters) {
+
+    // Echo out the specific info field
+    //---------------------------------
+
+    $fields = '';
+
+    if (! empty($parameters)) {
+        foreach ($parameters as $key_name => $details) {
+            $name = "group_info[extensions][$extension][$key_name]";
+            $value = $group_info['extensions'][$extension][$key_name];
+            $description =  $details['description'];
+            $field_read_only = $read_only;
+
+            if (isset($details['field_priority']) && ($details['field_priority'] === 'hidden')) {
+                continue;
+            } else if (isset($details['field_priority']) && ($details['field_priority'] === 'read_only')) {
+                if ($form_type === 'add')
+                    continue;
+
+                $field_read_only = TRUE;
+            }
+
+            if ($details['field_type'] === 'list') {
+                $fields .= field_dropdown($name, $details['field_options'], $value, $description, $field_read_only);
+            } else if ($details['field_type'] === 'simple_list') {
+                $fields .= field_simple_dropdown($name, $details['field_options'], $value, $description, $field_read_only);
+            } else if ($details['field_type'] === 'text') {
+                $fields .= field_input($name, $value, $description, $field_read_only);
+            } else if ($details['field_type'] === 'integer') {
+                $fields .= field_input($name, $value, $description, $field_read_only);
+            } else if ($details['field_type'] === 'text_array') {
+                $fields .= field_input($name . "[0]", $value[0], $description, $field_read_only);
+
+                for ($inx = 1; $inx < count($value); $inx++) {
+                    $description = ($inx === 0) ? $description : '';
+                    $fields .= field_input($name . "[1]", $value[$inx], $description, $field_read_only);
+                }
+                // Show an extra blank field
+                if ($form_type !== 'view')
+                    $fields .= field_input($name . "[$inx]", '', '', $field_read_only);
+            }
+        }
+    }
+
+    if (! empty($fields)) {
+        echo fieldset_header($extensions[$extension]['nickname']);
+        echo $fields;
+        echo fieldset_footer();
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Form close
+///////////////////////////////////////////////////////////////////////////////
 
 echo field_button_set($buttons);
 
