@@ -57,19 +57,19 @@ $anchors = array();
 foreach ($groups as $id => $details) {
 
     if ($mode === 'view') {
-        $anchor = '/app/' . $basename . '/policy/view_members/' . $details['group_name'];
+        $anchor = '/app/' . $basename . '/policy/view_members/' . $details['core']['group_name'];
         $detail_buttons = array(anchor_custom($anchor, lang('groups_view_members')));
     } else {
-        $anchor = '/app/' . $basename . '/policy/edit_members/' . $details['group_name'];
+        $anchor = '/app/' . $basename . '/policy/edit_members/' . $details['core']['group_name'];
         $detail_buttons = array(anchor_custom($anchor, lang('groups_edit_members')));
     }
 
-    $item['title'] = $details['group_name'];
+    $item['title'] = $details['core']['group_name'];
     $item['action'] = $anchor;
     $item['anchors'] = button_set($detail_buttons);
     $item['details'] = array(
-        $details['description'],
-        $details['group_name']
+        $details['core']['description'],
+        $details['core']['group_name']
     );
 
     $items[] = $item;

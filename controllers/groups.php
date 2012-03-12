@@ -171,11 +171,11 @@ class Groups extends ClearOS_Controller
             $data['basename'] = $this->app_name;
             $data['groups'] = array();
 
-            $all_groups = $this->group_manager->get_details(Group::TYPE_PLUGIN);
+            $all_groups = $this->group_manager->get_details(Group::FILTER_PLUGIN);
 
             foreach ($this->group_list as $group) {
                 if (array_key_exists($group, $all_groups))
-                $data['groups'][] = $all_groups[$group];
+                    $data['groups'][] = $all_groups[$group];
             }
 
             if ($this->accounts->get_capability() === Accounts_Engine::CAPABILITY_READ_WRITE)
