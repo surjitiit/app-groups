@@ -64,11 +64,13 @@ foreach ($groups as $id => $details) {
         $detail_buttons = array(anchor_custom($anchor, lang('groups_edit_members')));
     }
 
+    $policy_name = empty($details['core']['description']) ? lang('groups_global_policy') : $details['core']['description'];
+
     $item['title'] = $details['core']['group_name'];
     $item['action'] = $anchor;
     $item['anchors'] = button_set($detail_buttons);
     $item['details'] = array(
-        $details['core']['description'],
+        $policy_name,
         $details['core']['group_name']
     );
 
