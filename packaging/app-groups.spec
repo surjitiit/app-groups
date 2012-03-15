@@ -1,7 +1,7 @@
 
 Name: app-groups
 Epoch: 1
-Version: 1.0.7
+Version: 1.0.8
 Release: 1%{dist}
 Summary: Groups
 License: GPLv3
@@ -22,6 +22,7 @@ License: LGPLv3
 Group: ClearOS/Libraries
 Requires: app-base-core
 Requires: app-accounts-core
+Requires: app-base-core >= 1:1.0.6
 Requires: system-groups-driver
 
 %description core
