@@ -62,23 +62,31 @@ class Groups extends ClearOS_Controller
 {
     protected $app_name = NULL;
     protected $group_list = NULL;
+    protected $show_unhappy = FALSE;
 
     /**
      * Group membership constructor.
      *
-     * @param string $app_name    app that manages the group
-     * @param string $group_list  group name
+     * The group page itself does not specify parameters with this constructor.
+     * All others do so (e.g. PPTP Server policy, Web Proxy policy).
+     * In other words, the first two parameters are really mandatory.
+     *
+     * @param string  $app_name     app that manages the group
+     * @param string  $group_list   group name
+     * @param boolean $show_unhappy show widget when unhappy
      *
      * @return view
      */
 
-    function __construct($app_name, $group_list)
+    function __construct($app_name = NULL, $group_list = NULL, $show_unhappy = FALSE)
     {
-        if (! empty($app_name))
+        if (is_null($app_name)) {
+            $this->show_unhappy = TRUE;
+        } else {
             $this->app_name = $app_name;
-
-        if (! empty($group_list))
             $this->group_list = $group_list;
+            $this->show_unhappy = $show_unhappy;
+        }
     }
 
     /**
@@ -95,7 +103,8 @@ class Groups extends ClearOS_Controller
         $this->load->module('accounts/status');
 
         if ($this->status->unhappy()) {
-            $this->status->widget('groups');
+            if ($this->show_unhappy)
+                $this->status->widget('groups');
             return;
         }
 
