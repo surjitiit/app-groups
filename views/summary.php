@@ -137,11 +137,14 @@ sort($windows_items);
 // Windows groups
 ///////////////////////////////////////////////////////////////////////////////
 
+$options['default_rows'] = 25;
+
 echo summary_table(
     lang('groups_user_defined_groups'),
     $normal_anchors,
     $headers,
-    $normal_items
+    $normal_items,
+    $options
 );
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -152,5 +155,6 @@ echo summary_table(
     lang('groups_windows_groups'),
     $windows_anchors,
     $headers,
-    $windows_items
+    $windows_items,
+    $options
 );
