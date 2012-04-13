@@ -473,7 +473,11 @@ class Groups extends ClearOS_Controller
                     $this->group->update($group_info);
 
                 $this->page->set_status_updated();
-                redirect('/groups');
+
+                if ($form_type === 'add')
+                    redirect('/groups/edit_members/' . $group_name);
+                else
+                    redirect('/groups');
             } catch (Engine_Exception $e) {
                 $this->page->view_exception($e);
                 return;
