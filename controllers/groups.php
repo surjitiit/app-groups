@@ -355,8 +355,10 @@ class Groups extends ClearOS_Controller
         if ($this->input->post('submit')) {
             try {
                 $users = array();
+                // A period is not permitted as key, so translate it into a colon
+                
                 foreach ($this->input->post('users') as $user => $state)
-                    $users[] = $user;
+                    $users[] = preg_replace('/:/', '.', $user);
                 
                 $this->group->set_members($users);
 

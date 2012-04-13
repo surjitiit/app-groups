@@ -70,8 +70,9 @@ $headers = array(
 ///////////////////////////////////////////////////////////////////////////////
 
 foreach ($users as $username => $details) {
+    // A period is not permitted as key, so translate it into a colon
     $item['title'] = $username;
-    $item['name'] = 'users[' . $username . ']';
+    $item['name'] = 'users[' . preg_replace('/\./', ':', $username) . ']';
     $item['state'] = (in_array($username, $group_info['core']['members'])) ? TRUE : FALSE;
     $item['details'] = array(
         $username,
