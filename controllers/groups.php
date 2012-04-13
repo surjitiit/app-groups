@@ -126,6 +126,12 @@ class Groups extends ClearOS_Controller
 
     }
 
+    /**
+     * Index for all groups.
+     *
+     * @return view
+     */
+
     function index_all()
     {
         // Load libraries
@@ -163,6 +169,12 @@ class Groups extends ClearOS_Controller
 
         $this->page->view_form('groups/summary', $data, lang('groups_group_manager'), $options);
     }
+
+    /**
+     * Index for policy/plugin groups.
+     *
+     * @return view
+     */
 
     function index_policy()
     {
@@ -293,6 +305,26 @@ class Groups extends ClearOS_Controller
     }
 
     /**
+     * Group edit members view (for account manager hooke).
+     *
+     * $this->load->module does not seem to like multiple constructors, so
+     * this method was added as a workaround for Account Manager.
+     *
+     * @param string $app_name   app that manages the group
+     * @param string $group_name plugin group name
+     *
+     * @return view
+     */
+
+    function account_plugin_members($app_name, $group_name)
+    {
+        $this->app_name = $app_name;
+        $this->group_list = array($group_name);
+
+        $this->_handle_members('edit', $group_name, TRUE);
+    }
+
+    /**
      * User view.
      *
      * @param string $group_name group_name
@@ -325,13 +357,14 @@ class Groups extends ClearOS_Controller
     /**
      * Group common view/edit members form handler.
      *
-     * @param string $form_type  form type (add, edit or view)
-     * @param string $group_name group_name
+     * @param string  $form_type   form type (add, edit or view)
+     * @param string  $group_name  group_name
+     * @param boolean $account_app see account_plugin_members
      *
      * @return view
      */
 
-    function _handle_members($form_type, $group_name)
+    function _handle_members($form_type, $group_name, $account_app = FALSE)
     {
         // Load libraries
         //---------------
@@ -364,6 +397,8 @@ class Groups extends ClearOS_Controller
 
                 $this->page->set_status_updated();
 
+                if ($account_app)
+                    redirect('/accounts/plugins');
                 if (empty($this->app_name))
                     redirect('/groups');
                 else
@@ -383,6 +418,7 @@ class Groups extends ClearOS_Controller
             $data['basename'] = empty($this->app_name) ? '' : $this->app_name;
             $data['group_info'] = $this->group->get_info();
             $data['users'] = $this->user_manager->get_details();
+            $data['account_app'] = $account_app;
         } catch (Engine_Exception $e) {
             $this->page->view_exception($e);
             return;

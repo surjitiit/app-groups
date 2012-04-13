@@ -40,7 +40,10 @@ $this->lang->load('users');
 // Buttons
 ///////////////////////////////////////////////////////////////////////////////
 
-if (empty($basename)) {
+if ($account_app) {
+    $base_app = '/app/accounts/plugins';
+    $form = '/accounts/policy/members/' . preg_replace('/_plugin/', '', $group_info['core']['group_name']);
+} else if (empty($basename)) {
     $base_app = '/app/groups';
     $form = '/groups/edit_members/' . $group_info['core']['group_name'];
 } else {
