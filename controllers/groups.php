@@ -33,8 +33,10 @@
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
+use \Exception as Exception;
 use \clearos\apps\accounts\Accounts_Engine as Accounts_Engine;
 use \clearos\apps\groups\Group_Engine as Group;
+use \clearos\apps\groups\Group_Not_Found_Exception as Group_Not_Found_Exception;
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -157,7 +159,7 @@ class Groups extends ClearOS_Controller
                 $data['cache_action'] = TRUE;
             else
                 $data['cache_action'] = FALSE;
-        } catch (Engine_Exception $e) {
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
@@ -203,11 +205,13 @@ class Groups extends ClearOS_Controller
                 $data['mode'] = 'edit';
             else
                 $data['mode'] = 'view';
-
-        } catch (Engine_Exception $e) {
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
+
+        if (empty($data['groups']))
+            return;
 
         // Load views
         //-----------
@@ -272,7 +276,7 @@ class Groups extends ClearOS_Controller
             $this->group->delete();
             $this->page->set_status_deleted();
             redirect('/groups');
-        } catch (Engine_Exception $e) {
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
@@ -404,7 +408,7 @@ class Groups extends ClearOS_Controller
                 else
                     redirect($this->app_name);
 
-            } catch (Engine_Exception $e) {
+            } catch (Exception $e) {
                 $this->page->view_exception($e);
                 return;
             }
@@ -419,7 +423,10 @@ class Groups extends ClearOS_Controller
             $data['group_info'] = $this->group->get_info();
             $data['users'] = $this->user_manager->get_details();
             $data['account_app'] = $account_app;
-        } catch (Engine_Exception $e) {
+        } catch (Group_Not_Found_Exception $e) {
+            $this->page->view_form('groups/nomembers', NULL, lang('groups_members'));
+            return;
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
@@ -514,7 +521,7 @@ class Groups extends ClearOS_Controller
                     redirect('/groups/edit_members/' . $group_name);
                 else
                     redirect('/groups');
-            } catch (Engine_Exception $e) {
+            } catch (Exception $e) {
                 $this->page->view_exception($e);
                 return;
             }
@@ -532,7 +539,7 @@ class Groups extends ClearOS_Controller
                 $data['group_info'] = $this->group->get_info_defaults();
             else
                 $data['group_info'] = $this->group->get_info();
-        } catch (Engine_Exception $e) {
+        } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
         }
