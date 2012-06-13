@@ -99,8 +99,8 @@ class Group_Engine extends Engine
     const FILTER_WINDOWS = 8;   // Windows reserved groups
     const FILTER_PLUGIN = 16;   // Hidden groups
 
-    const FILTER_DEFAULT = 18;  // Builtin and user defined groups
     const FILTER_ALL = 31;
+    const FILTER_DEFAULT = 128;  // Driver will decide a sane default
 
     ///////////////////////////////////////////////////////////////////////////////
     // V A R I A B L E S
