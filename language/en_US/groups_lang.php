@@ -29,3 +29,4 @@ $lang['groups_description_invalid'] = 'Description is invalid.';
 $lang['groups_group_name_invalid'] = 'Group name is invalid.'; 
 $lang['groups_view_members'] = 'View Members';
 $lang['groups_global_policy'] = 'Global Policy';
+$lang['groups_group_id'] = 'Group ID';
