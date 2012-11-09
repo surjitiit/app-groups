@@ -78,8 +78,11 @@ class Group_Not_Found_Exception extends Engine_Exception
      * Group_Not_Found_Exception constructor.
      */
 
-    public function __construct()
+    public function __construct($group_name = NULL)
     {
-        parent::__construct(lang('groups_group_not_found'), CLEAROS_INFO);
+        $msg = lang('groups_group_not_found');
+        if ($group_name != NULL)
+            $msg = preg_replace("/\\.$/", "", $msg) . " - $group_name";;
+        parent::__construct($msg, CLEAROS_INFO);
     }
 }
