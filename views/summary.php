@@ -112,12 +112,11 @@ foreach ($groups as $group_name => $info) {
     if ($description_available) {
         $item['details'] = array(
             $group_name,
-            $info['core']['description'],
+            $info['core']['description']
         );
     } else {
         $item['details'] = array(
-            $group_name,
-            $info['core']['description'],
+            $group_name
         );
     }
 
