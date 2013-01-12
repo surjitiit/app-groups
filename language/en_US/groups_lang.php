@@ -30,3 +30,4 @@ $lang['groups_group_name_invalid'] = 'Group name is invalid.';
 $lang['groups_view_members'] = 'View Members';
 $lang['groups_global_policy'] = 'Global Policy';
 $lang['groups_group_id'] = 'Group ID';
+$lang['group_spaces_not_allowed_in_group_names'] = 'Spaces not allowed in group names';

@@ -485,7 +485,6 @@ class Groups extends ClearOS_Controller
         if ($form_type === 'add')
             $this->form_validation->set_policy('group_name', 'openldap_directory/Group_Driver', 'validate_group_name', TRUE);
 
-
         // Validate extensions
         //--------------------
 
@@ -501,6 +500,14 @@ class Groups extends ClearOS_Controller
         }
 
         $form_ok = $this->form_validation->run();
+
+        // Extra validation: don't allow groups with spaces via GUI (API still allows it) -- see tracker #723
+        if ($form_ok && $this->input->post('submit') && ($form_type === 'add')) {
+            if (preg_match('/ /', $group_name)) {
+                $this->form_validation->set_error('group_name', lang('group_spaces_not_allowed_in_group_names'));
+                $form_ok = FALSE;
+            }
+        }
 
         // Handle form submit
         //-------------------
