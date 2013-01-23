@@ -1,7 +1,7 @@
 <?php
 
 /**
- * ClearOS group manager engine.
+ * Group manager engine.
  *
  * @category   Apps
  * @package    Groups
@@ -61,7 +61,7 @@ clearos_load_library('base/Engine');
 ///////////////////////////////////////////////////////////////////////////////
 
 /**
- * ClearOS groups manager engine.
+ * Group manager engine.
  *
  * @category   Apps
  * @package    Groups
@@ -79,7 +79,7 @@ class Group_Manager_Engine extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Group_Manager_Engine constructor.
+     * Group manager constructor.
      */
 
     public function __construct()

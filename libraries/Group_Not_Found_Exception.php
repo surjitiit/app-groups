@@ -75,7 +75,9 @@ clearos_load_library('base/Engine_Exception');
 class Group_Not_Found_Exception extends Engine_Exception
 {
     /**
-     * Group_Not_Found_Exception constructor.
+     * Group not found exception constructor.
+     *
+     * @param string $group_name group name
      */
 
     public function __construct($group_name = NULL)

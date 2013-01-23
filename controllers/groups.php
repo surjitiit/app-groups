@@ -504,7 +504,7 @@ class Groups extends ClearOS_Controller
         // Extra validation: don't allow groups with spaces via GUI (API still allows it) -- see tracker #723
         if ($form_ok && $this->input->post('submit') && ($form_type === 'add')) {
             if (preg_match('/ /', $group_name)) {
-                $this->form_validation->set_error('group_name', lang('group_spaces_not_allowed_in_group_names'));
+                $this->form_validation->set_error('group_name', lang('groups_spaces_not_allowed_in_group_names'));
                 $form_ok = FALSE;
             }
         }

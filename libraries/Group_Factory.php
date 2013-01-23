@@ -87,7 +87,7 @@ class Group_Factory extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Group constructor.
+     * Group factory constructor.
      */
 
     public function __construct()

@@ -75,7 +75,7 @@ clearos_load_library('base/Engine_Exception');
 class Group_Already_Exists_Exception extends Engine_Exception
 {
     /**
-     * Group_Already_Exists_Exception constructor.
+     * Group already exists exception constructor.
      */
 
     public function __construct()

@@ -84,7 +84,7 @@ class Group_Manager_Factory extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     /**
-     * Group manager constructor.
+     * Group manager factory constructor.
      */
 
     public function __construct()
