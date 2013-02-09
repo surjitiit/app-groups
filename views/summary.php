@@ -78,35 +78,36 @@ if ($mode === 'edit') {
 
 foreach ($groups as $group_name => $info) {
 
-    if ($mode === 'view') {
+    $safe_group_name = preg_replace('/\$/', '~', $group_name);
 
+    if ($mode === 'view') {
         if ($description_available) {
             $buttons = array(
-                anchor_custom('/app/groups/view_members/' . $group_name, lang('groups_view_members'), 'high'),
-                anchor_view('/app/groups/view/' . $group_name, 'low'),
+                anchor_custom('/app/groups/view_members/' . $safe_group_name, lang('groups_view_members'), 'high'),
+                anchor_view('/app/groups/view/' . $safe_group_name, 'low'),
             );
         } else {
             $buttons = array(
-                anchor_custom('/app/groups/view_members/' . $group_name, lang('groups_view_members'), 'high'),
+                anchor_custom('/app/groups/view_members/' . $safe_group_name, lang('groups_view_members'), 'high'),
             );
         }
     } else {
          if ($info['type'] === Group::TYPE_NORMAL) {
             $buttons = array(
-                anchor_custom('/app/groups/edit_members/' . $group_name, lang('groups_edit_members'), 'high'),
-                anchor_edit('/app/groups/edit/' . $group_name, 'low'),
-                anchor_delete('/app/groups/delete/' . $group_name, 'low')
+                anchor_custom('/app/groups/edit_members/' . $safe_group_name, lang('groups_edit_members'), 'high'),
+                anchor_edit('/app/groups/edit/' . $safe_group_name, 'low'),
+                anchor_delete('/app/groups/delete/' . $safe_group_name, 'low')
             );
         } else {
             $buttons = array(
-                anchor_custom('/app/groups/edit_members/' . $group_name, lang('groups_edit_members'), 'high'),
-                anchor_edit('/app/groups/edit/' . $group_name, 'low'),
+                anchor_custom('/app/groups/edit_members/' . $safe_group_name, lang('groups_edit_members'), 'high'),
+                anchor_edit('/app/groups/edit/' . $safe_group_name, 'low'),
             );
         }
     }
 
     $item['title'] = $group_name;
-    $item['action'] = '/app/groups/edit/' . $group_name;
+    $item['action'] = '/app/groups/edit/' . $safe_group_name;
     $item['anchors'] = button_set($buttons);
 
     if ($description_available) {

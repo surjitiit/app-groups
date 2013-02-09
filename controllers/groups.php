@@ -247,9 +247,11 @@ class Groups extends ClearOS_Controller
 
     function delete($group_name)
     {
+        $show_group_name = preg_replace('/~/', '$', $group_name);
+
         $confirm_uri = '/app/groups/destroy/' . $group_name;
         $cancel_uri = '/app/groups';
-        $items = array($group_name);
+        $items = array($show_group_name);
 
         $this->page->view_confirm_delete($confirm_uri, $cancel_uri, $items);
     }
@@ -264,6 +266,8 @@ class Groups extends ClearOS_Controller
 
     function destroy($group_name)
     {
+        $group_name = preg_replace('/~/', '$', $group_name);
+
         // Load libraries
         //---------------
 
@@ -292,6 +296,8 @@ class Groups extends ClearOS_Controller
 
     function edit($group_name)
     {
+        $group_name = preg_replace('/~/', '$', $group_name);
+
         $this->_handle_item('edit', $group_name);
     }
 
@@ -305,6 +311,8 @@ class Groups extends ClearOS_Controller
 
     function edit_members($group_name)
     {
+        $group_name = preg_replace('/~/', '$', $group_name);
+
         $this->_handle_members('edit', $group_name);
     }
 
@@ -338,6 +346,8 @@ class Groups extends ClearOS_Controller
 
     function view($group_name)
     {
+        $group_name = preg_replace('/~/', '$', $group_name);
+
         $this->_handle_item('view', $group_name);
     }
 
@@ -351,6 +361,8 @@ class Groups extends ClearOS_Controller
 
     function view_members($group_name)
     {
+        $group_name = preg_replace('/~/', '$', $group_name);
+
         $this->_handle_members('view', $group_name);
     }
 
@@ -525,7 +537,8 @@ class Groups extends ClearOS_Controller
                 $this->page->set_status_updated();
 
                 if ($form_type === 'add')
-                    redirect('/groups/edit_members/' . $group_name);
+                    redirect('/groups/edit_members/' . preg_replace('/\$/', '~', $group_name));
+
                 else
                     redirect('/groups');
             } catch (Exception $e) {

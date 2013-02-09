@@ -41,22 +41,25 @@ $this->lang->load('users');
 // Form modes
 ///////////////////////////////////////////////////////////////////////////////
 
+$group_name = $group_info['core']['group_name'];
+$safe_group_name = preg_replace('/\$/', '~', $group_name);
+
 if ($form_type === 'edit') {
     $description_read_only = FALSE;
     $group_name_read_only = TRUE;
 
-    $form_path = '/groups/edit/' . $group_info['core']['group_name'];
+    $form_path = '/groups/edit/' . $safe_group_name;
     $buttons = array(
         form_submit_update('submit'),
-        anchor_custom('/app/groups/edit_members/' . $group_info['core']['group_name'], lang('groups_edit_members'), 'low'),
+        anchor_custom('/app/groups/edit_members/' . $safe_group_name, lang('groups_edit_members'), 'low'),
         anchor_cancel('/app/groups/'),
-        anchor_delete('/app/groups/delete/' . $group_info['core']['group_name'])
+        anchor_delete('/app/groups/delete/' . $safe_group_name)
     );
 } else if ($form_type === 'view') {
     $description_read_only = TRUE;
     $group_name_read_only = TRUE;
 
-    $form_path = '/groups/view/' . $group_info['core']['group_name'];
+    $form_path = '/groups/view/' . $safe_group_name;
     $buttons = array(
         anchor_cancel('/app/groups/')
     );
@@ -79,7 +82,7 @@ echo form_open($form_path);
 echo form_header(lang('groups_group'));
 
 echo fieldset_header(lang('base_settings'));
-echo field_input('group_name', $group_info['core']['group_name'], lang('groups_group_name'), $group_name_read_only);
+echo field_input('group_name', $group_name, lang('groups_group_name'), $group_name_read_only);
 echo field_input('description', $group_info['core']['description'], lang('groups_description'), $description_read_only);
 echo fieldset_footer();
 

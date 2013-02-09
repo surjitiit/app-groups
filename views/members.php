@@ -40,15 +40,19 @@ $this->lang->load('users');
 // Buttons
 ///////////////////////////////////////////////////////////////////////////////
 
+$group_name = $group_info['core']['group_name'];
+$safe_group_name = preg_replace('/\$/', '~', $group_name);
+
+
 if ($account_app) {
     $base_app = '/app/accounts/plugins';
-    $form = '/accounts/policy/members/' . preg_replace('/_plugin/', '', $group_info['core']['group_name']);
+    $form = '/accounts/policy/members/' . preg_replace('/_plugin/', '', $safe_group_name);
 } else if (empty($basename)) {
     $base_app = '/app/groups';
-    $form = '/groups/edit_members/' . $group_info['core']['group_name'];
+    $form = '/groups/edit_members/' . $safe_group_name;
 } else {
     $base_app = '/app/' . $basename . '/policy';
-    $form = $basename . '/policy/edit_members/' . $group_info['core']['group_name'];
+    $form = $basename . '/policy/edit_members/' . $safe_group_name;
 }
 
 if ($mode === 'view') {
