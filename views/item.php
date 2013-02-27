@@ -42,7 +42,7 @@ $this->lang->load('users');
 ///////////////////////////////////////////////////////////////////////////////
 
 $group_name = $group_info['core']['group_name'];
-$safe_group_name = preg_replace('/\$/', '~', $group_name);
+$safe_group_name = strtr($group_name, '$ ', '~:'); // spaces and dollars not allowed, so munge
 
 if ($form_type === 'edit') {
     $description_read_only = FALSE;

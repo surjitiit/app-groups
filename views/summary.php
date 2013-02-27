@@ -78,7 +78,7 @@ if ($mode === 'edit') {
 
 foreach ($groups as $group_name => $info) {
 
-    $safe_group_name = preg_replace('/\$/', '~', $group_name);
+    $safe_group_name = strtr($group_name, '$ ', '~:'); // spaces and dollars not allowed, so munge
 
     if ($mode === 'view') {
         if ($description_available) {

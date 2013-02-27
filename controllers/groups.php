@@ -247,7 +247,7 @@ class Groups extends ClearOS_Controller
 
     function delete($group_name)
     {
-        $show_group_name = preg_replace('/~/', '$', $group_name);
+        $show_group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         $confirm_uri = '/app/groups/destroy/' . $group_name;
         $cancel_uri = '/app/groups';
@@ -266,7 +266,7 @@ class Groups extends ClearOS_Controller
 
     function destroy($group_name)
     {
-        $group_name = preg_replace('/~/', '$', $group_name);
+        $group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         // Load libraries
         //---------------
@@ -296,7 +296,7 @@ class Groups extends ClearOS_Controller
 
     function edit($group_name)
     {
-        $group_name = preg_replace('/~/', '$', $group_name);
+        $group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         $this->_handle_item('edit', $group_name);
     }
@@ -311,7 +311,7 @@ class Groups extends ClearOS_Controller
 
     function edit_members($group_name)
     {
-        $group_name = preg_replace('/~/', '$', $group_name);
+        $group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         $this->_handle_members('edit', $group_name);
     }
@@ -346,7 +346,7 @@ class Groups extends ClearOS_Controller
 
     function view($group_name)
     {
-        $group_name = preg_replace('/~/', '$', $group_name);
+        $group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         $this->_handle_item('view', $group_name);
     }
@@ -361,7 +361,7 @@ class Groups extends ClearOS_Controller
 
     function view_members($group_name)
     {
-        $group_name = preg_replace('/~/', '$', $group_name);
+        $group_name = strtr($group_name, '~:', '$ '); // spaces and dollars not allowed, so munge
 
         $this->_handle_members('view', $group_name);
     }
@@ -537,8 +537,7 @@ class Groups extends ClearOS_Controller
                 $this->page->set_status_updated();
 
                 if ($form_type === 'add')
-                    redirect('/groups/edit_members/' . preg_replace('/\$/', '~', $group_name));
-
+                    redirect('/groups/edit_members/' . strtr($group_name, '$ ', '~:'));
                 else
                     redirect('/groups');
             } catch (Exception $e) {
