@@ -330,10 +330,14 @@ class Groups extends ClearOS_Controller
 
     function account_plugin_members($app_name, $group_name)
     {
+        $this->load->factory('accounts/Accounts_Factory');
+
         $this->app_name = $app_name;
         $this->group_list = array($group_name);
 
-        $this->_handle_members('edit', $group_name, TRUE);
+        $mode = ($this->accounts->get_capability() === Accounts_Engine::CAPABILITY_READ_WRITE) ? 'edit' : 'view';
+
+        $this->_handle_members($mode, $group_name, TRUE);
     }
 
     /**
