@@ -3,9 +3,9 @@
 /**
  * Group OpenLDAP user extension.
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Libraries
+ * @category   apps
+ * @package    groups
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
@@ -68,9 +68,9 @@ clearos_load_library('openldap/Utilities');
 /**
  * Group OpenLDAP user extension.
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Libraries
+ * @category   apps
+ * @package    groups
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later

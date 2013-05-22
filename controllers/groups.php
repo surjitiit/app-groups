@@ -3,9 +3,9 @@
 /**
  * Groups controller.
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Controllers
+ * @category   apps
+ * @package    groups
+ * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later
@@ -51,9 +51,9 @@ use \clearos\apps\groups\Group_Not_Found_Exception as Group_Not_Found_Exception;
  * will use this controller to manage the "pptpd_server_plugin" group
  * (and *only* this app plugin group).
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Controllers
+ * @category   apps
+ * @package    groups
+ * @subpackage controllers
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/gpl.html GNU General Public License version 3 or later

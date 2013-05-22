@@ -3,9 +3,9 @@
 /**
  * ClearOS group factory.
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Libraries
+ * @category   apps
+ * @package    groups
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
@@ -71,9 +71,9 @@ clearos_load_library('base/Engine');
  * For details, please see:
  * http://www.clearfoundation.com/docs/developer/architecture/directory/uids_gids_and_rids
  *
- * @category   Apps
- * @package    Groups
- * @subpackage Libraries
+ * @category   apps
+ * @package    groups
+ * @subpackage libraries
  * @author     ClearFoundation <developer@clearfoundation.com>
  * @copyright  2011 ClearFoundation
  * @license    http://www.gnu.org/copyleft/lgpl.html GNU Lesser General Public License version 3 or later
