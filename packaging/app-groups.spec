@@ -1,7 +1,7 @@
 
 Name: app-groups
 Epoch: 1
-Version: 1.4.30
+Version: 1.5.0
 Release: 1%{dist}
 Summary: Groups
 License: GPLv3
