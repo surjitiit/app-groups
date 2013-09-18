@@ -5,7 +5,7 @@
 /////////////////////////////////////////////////////////////////////////////
 
 $app['basename'] = 'groups';
-$app['version'] = '1.5.0';
+$app['version'] = '1.5.4';
 $app['release'] = '1';
 $app['vendor'] = 'ClearFoundation';
 $app['packager'] = 'ClearFoundation';
@@ -34,5 +34,4 @@ $app['requires'] = array(
 $app['core_requires'] = array(
     'app-accounts-core',
     'app-base-core >= 1:1.0.6',
-    'system-groups-driver', 
 );

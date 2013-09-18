@@ -1,7 +1,7 @@
 
 Name: app-groups
 Epoch: 1
-Version: 1.5.0
+Version: 1.5.4
 Release: 1%{dist}
 Summary: Groups
 License: GPLv3
@@ -23,7 +23,6 @@ Group: ClearOS/Libraries
 Requires: app-base-core
 Requires: app-accounts-core
 Requires: app-base-core >= 1:1.0.6
-Requires: system-groups-driver
 
 %description core
 The groups app allows an administrator to create, delete and modify groups on the system.  Groups can be used to efficiently manage permissions in accessing server resources.
