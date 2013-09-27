@@ -68,7 +68,6 @@ if ($mode === 'view') {
 
 $headers = array(
     lang('users_username'),
-    lang('users_full_name'),
 );
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -82,7 +81,6 @@ foreach ($users as $username => $details) {
     $item['state'] = (in_array($username, $group_info['core']['members'])) ? TRUE : FALSE;
     $item['details'] = array(
         $username,
-        $details['core']['full_name']
     );
 
     $items[] = $item;
@@ -92,10 +90,13 @@ foreach ($users as $username => $details) {
 // List table
 ///////////////////////////////////////////////////////////////////////////////
 
+$description = $group_info['core']['group_name'] . ' - ' . $group_info['core']['description'];
+$description = (strlen($description) > 40) ? substr($description, 0, 40) . ' ...' : $description;
+
 echo form_open($form);
 
 echo list_table(
-    $group_info['core']['description'],
+    $description,
     $buttons,
     $headers,
     $items,
