@@ -53,8 +53,10 @@ clearos_load_language('groups');
 ///////////////////////////////////////////////////////////////////////////////
 
 use \clearos\apps\base\Engine as Engine;
+use \clearos\apps\base\File as File;
 
 clearos_load_library('base/Engine');
+clearos_load_library('base/File');
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -85,5 +87,40 @@ class Group_Manager_Engine extends Engine
     public function __construct()
     {
         clearos_profile(__METHOD__, __LINE__);
+    }
+
+    /**
+     * Loads groups from Posix.
+     *
+     * @return array group information
+     * @throws Engine_Exception
+     */
+
+    protected function _get_details_from_posix()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $file = new File(Group_Engine::FILE_POSIX_GROUPS);
+        $contents = $file->get_contents_as_array();
+
+        $group_data = array();
+
+        foreach ($contents as $line) {
+            $data = explode(":", $line);
+
+            $gid = $data[2];
+
+            if (($gid >= Group_Engine::GID_RANGE_SYSTEM_MIN) && ($gid <= Group_Engine::GID_RANGE_SYSTEM_MAX)) {
+                $assoc_data['core']['group_name'] = $data[0];
+                $assoc_data['core']['type'] = Group_Engine::TYPE_SYSTEM;
+                $assoc_data['core']['description'] = '';
+                $assoc_data['core']['members'] = explode(',', $data[3]);
+                $group_data[$data[0]] = $assoc_data;
+            }
+        }
+
+        ksort($group_data);
+
+        return $group_data;
     }
 }

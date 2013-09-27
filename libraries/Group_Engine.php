@@ -52,9 +52,21 @@ clearos_load_language('groups');
 // D E P E N D E N C I E S
 ///////////////////////////////////////////////////////////////////////////////
 
+// Classes
+//--------
+
 use \clearos\apps\base\Engine as Engine;
+use \clearos\apps\base\File as File;
 
 clearos_load_library('base/Engine');
+clearos_load_library('base/File');
+
+// Exceptions
+//-----------
+
+use \clearos\apps\base\File_No_Match_Exception as File_No_Match_Exception;
+
+clearos_load_library('base/File_No_Match_Exception');
 
 ///////////////////////////////////////////////////////////////////////////////
 // C L A S S
@@ -77,6 +89,17 @@ class Group_Engine extends Engine
     ///////////////////////////////////////////////////////////////////////////////
     // C O N S T A N T S
     ///////////////////////////////////////////////////////////////////////////////
+
+    // Files and paths
+    //----------------
+
+    const FILE_POSIX_GROUPS = '/etc/group';
+
+    // Group ID ranges
+    //----------------
+
+    const GID_RANGE_SYSTEM_MIN = '0';
+    const GID_RANGE_SYSTEM_MAX = '499';
 
     // Group types
     //------------
@@ -188,5 +211,51 @@ class Group_Engine extends Engine
     public function __construct()
     {
         clearos_profile(__METHOD__, __LINE__);
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////
+    // P R I V A T E   M E T H O D S
+    ///////////////////////////////////////////////////////////////////////////////
+
+    /**
+     * Loads group from Posix.
+     *
+     * @return void
+     * @throws Engine_Exception
+     */
+
+    protected function _load_group_from_posix()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        $info = array();
+
+        $file = new File(self::FILE_POSIX_GROUPS);
+
+        try {
+            $line = $file->lookup_line('/^' . $this->group_name . ':/i');
+        } catch (File_No_Match_Exception $e) {
+            return array();;
+        }
+
+        $parts = explode(':', $line);
+
+        if (count($parts) != 4)
+            return;
+
+        $info['core']['group_name'] = $parts[0];
+        $info['core']['gid_number'] = $parts[2];
+        $info['core']['members'] = explode(',', $parts[3]);
+
+        // Sanity check: check for non-compliant group ID
+        //-----------------------------------------------
+
+        if (($info['core']['gid_number'] >= self::GID_RANGE_SYSTEM_MIN) && ($info['core']['gid_number'] <= self::GID_RANGE_SYSTEM_MAX)) {
+            $info['core']['type'] = self::TYPE_SYSTEM;
+        } else {
+            $info['core']['type'] = self::TYPE_UNKNOWN;
+        }
+
+        return $info;
     }
 }
