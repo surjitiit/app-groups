@@ -470,6 +470,7 @@ class Groups extends ClearOS_Controller
         $this->lang->load('groups');
         $this->load->factory('groups/Group_Factory', $group_name);
         $this->load->factory('accounts/Accounts_Factory');
+        $this->load->library('accounts/Accounts_Configuration');
 
         // Check group policy
         //-------------------
@@ -485,6 +486,7 @@ class Groups extends ClearOS_Controller
 
         try {
             $info_map = $this->group->get_info_map();
+            $driver = $this->accounts_configuration->get_driver();
         } catch (Exception $e) {
             $this->page->view_exception($e);
             return;
@@ -495,11 +497,10 @@ class Groups extends ClearOS_Controller
 
         $this->load->library('form_validation');
 
-        // TODO: need to make this driver friendly instead of hard-coding openldap_directory
-        $this->form_validation->set_policy('description', 'openldap_directory/Group_Driver', 'validate_description', TRUE);
+        $this->form_validation->set_policy('description', $driver . '/Group_Driver', 'validate_description', TRUE);
 
         if ($form_type === 'add')
-            $this->form_validation->set_policy('group_name', 'openldap_directory/Group_Driver', 'validate_group_name', TRUE);
+            $this->form_validation->set_policy('group_name', $driver . '/Group_Driver', 'validate_group_name', TRUE);
 
         // Validate extensions
         //--------------------
