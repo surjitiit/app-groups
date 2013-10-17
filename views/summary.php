@@ -92,7 +92,7 @@ foreach ($groups as $group_name => $info) {
             );
         }
     } else {
-         if ($info['type'] === Group::TYPE_NORMAL) {
+         if ($info['core']['type'] === Group::TYPE_NORMAL) {
             $buttons = array(
                 anchor_custom('/app/groups/edit_members/' . $safe_group_name, lang('groups_edit_members'), 'high'),
                 anchor_edit('/app/groups/edit/' . $safe_group_name, 'low'),
