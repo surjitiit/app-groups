@@ -159,13 +159,15 @@ echo summary_table(
 // Windows groups
 ///////////////////////////////////////////////////////////////////////////////
 
-echo summary_table(
-    lang('groups_windows_groups'),
-    $windows_anchors,
-    $headers,
-    $windows_items,
-    $options
-);
+if ($show_windows_groups) {
+    echo summary_table(
+        lang('groups_windows_groups'),
+        $windows_anchors,
+        $headers,
+        $windows_items,
+        $options
+    );
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // Built-in groups

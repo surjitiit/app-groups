@@ -90,6 +90,24 @@ class Group_Manager_Engine extends Engine
     }
 
     /**
+     * Returns hint on how to handle displaying Windows groups.
+     *
+     * @return boolean TRUE if Windows groups should be exposed
+     * @throws Engine_Exception
+     */
+
+    public function show_windows_groups()
+    {
+        clearos_profile(__METHOD__, __LINE__);
+
+        // TODO: a bit kludgy.  Use API instead.
+        if (file_exists('/var/clearos/samba_directory/initialized') || file_exists('/var/clearos/samba_common/initialized'))
+            return TRUE;
+        else
+            return FALSE;
+    }
+
+    /**
      * Loads groups from Posix.
      *
      * @return array group information
