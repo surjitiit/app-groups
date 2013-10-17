@@ -109,6 +109,7 @@ class Group_Engine extends Engine
     const TYPE_BUILTIN = 'builtin';
     const TYPE_WINDOWS = 'windows';
     const TYPE_PLUGIN = 'plugin';
+    const TYPE_HIDDEN = 'hidden';
     const TYPE_UNKNOWN = 'unknown';
 
     // Group filters
@@ -130,25 +131,12 @@ class Group_Engine extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     public static $hidden_list = array(
-        'account_operators',
-        'account operators',
-        'administrators',
-        'backup_operators',
-        'backup operators',
-        'domain_computers',
-        'domain computers',
         'domain_controllers',
         'domain controllers',
-        'domain_guests',
-        'domain guests',
-        'guests',
-        'power_users',
-        'power users',
-        'print_operators',
-        'print operators',
-        'server_operators',
-        'server operators',
-        'users'
+        'domain_computers',
+        'domain computers',
+        'read-only_domain_controllers',
+        'read-only domain controllers'
     );
 
     public static $builtin_list = array(
@@ -169,14 +157,8 @@ class Group_Engine extends Engine
         'dnsupdateproxy',
         'domain_admins',
         'domain admins',
-        'domain_computers',
-        'domain computers',
-        'domain_controllers',
-        'domain controllers',
         'domain_guests',
         'domain guests',
-        'domain_users',
-        'domain users',
         'enterprise_admins',
         'enterprise admins',
         'enterprise_read-only_domain_controllers',
@@ -190,8 +172,6 @@ class Group_Engine extends Engine
         'print operators',
         'ras_and_ias_servers',
         'ras and ias servers',
-        'read-only_domain_controllers',
-        'read-only domain controllers',
         'schema_admins',
         'schema admins',
         'server_operators',

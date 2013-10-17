@@ -92,11 +92,16 @@ foreach ($groups as $group_name => $info) {
             );
         }
     } else {
-         if ($info['core']['type'] === Group::TYPE_NORMAL) {
+        if ($info['core']['type'] === Group::TYPE_NORMAL) {
             $buttons = array(
                 anchor_custom('/app/groups/edit_members/' . $safe_group_name, lang('groups_edit_members'), 'high'),
                 anchor_edit('/app/groups/edit/' . $safe_group_name, 'low'),
                 anchor_delete('/app/groups/delete/' . $safe_group_name, 'low')
+            );
+        } else if ($info['core']['type'] === Group::TYPE_BUILTIN) {
+            $buttons = array(
+                anchor_custom('/app/groups/view_members/' . $safe_group_name, lang('groups_view_members'), 'high'),
+                anchor_view('/app/groups/view/' . $safe_group_name, 'low'),
             );
         } else {
             $buttons = array(
@@ -127,11 +132,14 @@ foreach ($groups as $group_name => $info) {
         $plugin_items[] = $item;
     else if ($info['core']['type'] === Group::TYPE_WINDOWS)
         $windows_items[] = $item;
+    else if ($info['core']['type'] === Group::TYPE_BUILTIN)
+        $builtin_items[] = $item;
 }
 
 sort($normal_items);
 sort($plugin_items);
 sort($windows_items);
+sort($builtin_items);
 
 ///////////////////////////////////////////////////////////////////////////////
 // Windows groups
@@ -156,5 +164,17 @@ echo summary_table(
     $windows_anchors,
     $headers,
     $windows_items,
+    $options
+);
+
+///////////////////////////////////////////////////////////////////////////////
+// Built-in groups
+///////////////////////////////////////////////////////////////////////////////
+
+echo summary_table(
+    lang('groups_builtin_groups'),
+    $builtin_anchors,
+    $headers,
+    $builtin_items,
     $options
 );
