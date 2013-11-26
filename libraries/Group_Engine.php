@@ -135,14 +135,14 @@ class Group_Engine extends Engine
         'domain controllers',
         'domain_computers',
         'domain computers',
+        'domain_users',
+        'domain users',
         'read-only_domain_controllers',
         'read-only domain controllers'
     );
 
     public static $builtin_list = array(
-        'allusers',
-        'domain_users',
-        'domain users'
+        'allusers'
     );
 
     public static $windows_list = array(
