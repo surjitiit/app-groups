@@ -1,7 +1,7 @@
 
 Name: app-groups
 Epoch: 1
-Version: 1.5.10
+Version: 1.5.15
 Release: 1%{dist}
 Summary: Groups
 License: GPLv3
@@ -74,7 +74,6 @@ exit 0
 %files core
 %defattr(-,root,root)
 %exclude /usr/clearos/apps/groups/packaging
-%exclude /usr/clearos/apps/groups/tests
 %dir /usr/clearos/apps/groups
 /usr/clearos/apps/groups/deploy
 /usr/clearos/apps/groups/language
