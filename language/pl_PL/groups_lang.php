@@ -29,7 +29,6 @@ $lang['groups_policy'] = 'Policy';
 $lang['groups_policy_name'] = 'Nazwa reguły';
 $lang['groups_policy_name_invalid'] = 'Policy name is invalid.';
 $lang['groups_spaces_not_allowed_in_group_names'] = 'Spacje nie są dozwolone w nazwach grup.';
-$lang['groups_tooltip'] = 'Mimo, że nie jest to tutaj pokazane, grupa allusers zawiera wszystkich użytkowników systemu.';
 $lang['groups_user_defined_groups'] = 'Grupy zdefiniowane przez użytkownika';
 $lang['groups_view_members'] = 'Widok członków';
 $lang['groups_windows_groups'] = 'Grupy Windows';

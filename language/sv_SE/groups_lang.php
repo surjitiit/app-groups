@@ -29,7 +29,6 @@ $lang['groups_policy'] = 'Policy';
 $lang['groups_policy_name'] = 'Namn på policyn';
 $lang['groups_policy_name_invalid'] = 'Policy name is invalid.';
 $lang['groups_spaces_not_allowed_in_group_names'] = 'Mellanslag är inte tillåtet i gruppnamn.';
-$lang['groups_tooltip'] = 'Även om det inte framgår tydligt här så inkluderar gruppen allusers alla användare på systemet.';
 $lang['groups_user_defined_groups'] = 'Använd definierade grupper';
 $lang['groups_view_members'] = 'Visa medlemmar';
 $lang['groups_windows_groups'] = 'Windowsgrupper';
