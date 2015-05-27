@@ -59,7 +59,7 @@ if ($mode === 'view') {
     $buttons = array(anchor_cancel($base_app));
     $read_only = TRUE;
 } else {
-    $buttons = array(anchor_cancel($base_app, 'high'), form_submit_update('submit', 'high'));
+    $buttons = array(anchor_cancel($base_app, 'low'), form_submit_update('submit', 'high'));
     $read_only = FALSE;
 }
 
