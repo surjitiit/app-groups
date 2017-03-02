@@ -1,0 +1,32 @@
+<?php
+
+$lang['groups_add_user_defined_group'] = 'Engeza Umsebenzisi Defined Group';
+$lang['groups_app_description'] = 'Insiza amaqembu ivumela uhlelo umlawuli ukudala, susa futhi ushintshe amaqembu ohlelweni. Amaqembu ingasetshenziswa kahle futhi uphathe izimvume ekufinyeleleni iseva izinsiza.';
+$lang['groups_app_name'] = 'Amaqembu';
+$lang['groups_app_policies'] = 'Izinqubomgomo App';
+$lang['groups_builtin_groups'] = 'Akhiwa-in Amaqembu';
+$lang['groups_description'] = 'incazelo';
+$lang['groups_description_invalid'] = 'Incazelo ayivumelekile.';
+$lang['groups_edit_members'] = 'Hlela Amalungu';
+$lang['groups_global_policy'] = 'Policy Global';
+$lang['groups_group_already_exists'] = 'Iqembu selivele likhona.';
+$lang['groups_group'] = 'Iqembu';
+$lang['groups_group_id'] = 'ID Group';
+$lang['groups_group_is_reserved_for_system'] = 'Group kugcinelwe uhlelo.';
+$lang['groups_group_is_reserved_for_windows'] = 'Group kugcinelwe Windows ukuhlanganiswa.';
+$lang['groups_group_manager'] = 'Umphathi Group';
+$lang['groups_group_members'] = 'Amalungu Group';
+$lang['groups_group_name'] = 'Igama Group';
+$lang['groups_group_name_invalid'] = 'Igama Group alivumelekile.';
+$lang['groups_group_not_found'] = 'Iqembu ayitholakalanga.';
+$lang['groups_groups'] = 'Amaqembu';
+$lang['groups_members'] = 'Amalungu';
+$lang['groups_no_user_defined_groups_warning'] = 'Zonke amaqembu umsebenzisi kuchazwe inqubomgomo amisiwe. Uma ungathanda ukwengeza inqubomgomo entsha, sicela wengeze amaqembu.';
+$lang['groups_plugin_groups'] = 'Amaqembu Plugin';
+$lang['groups_policy_name_invalid'] = 'Igama yemfihlo alivumelekile.';
+$lang['groups_policy_name'] = 'Igama yemfihlo';
+$lang['groups_policy'] = 'Policy';
+$lang['groups_spaces_not_allowed_in_group_names'] = 'Izikhala azivumelekile emagameni iqembu.';
+$lang['groups_user_defined_groups'] = 'Amaqembu Umsebenzisi Defined';
+$lang['groups_view_members'] = 'Buka Amalungu';
+$lang['groups_windows_groups'] = 'Windows Amaqembu';
