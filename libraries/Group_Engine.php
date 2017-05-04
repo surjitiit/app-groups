@@ -131,12 +131,14 @@ class Group_Engine extends Engine
     ///////////////////////////////////////////////////////////////////////////////
 
     public static $hidden_list = array(
+        'allowed rodc password replication group',
+        'allowed_rodc password_replication_group',
+        'denied rodc password replication group',
+        'denied_rodc_password_replication_group',
         'domain_controllers',
         'domain controllers',
         'domain_computers',
         'domain computers',
-        'domain_users',
-        'domain users',
         'read-only_domain_controllers',
         'read-only domain controllers'
     );
@@ -159,6 +161,8 @@ class Group_Engine extends Engine
         'domain admins',
         'domain_guests',
         'domain guests',
+        'domain_users',
+        'domain users',
         'enterprise_admins',
         'enterprise admins',
         'enterprise_read-only_domain_controllers',
