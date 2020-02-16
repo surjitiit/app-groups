@@ -62,13 +62,16 @@ if ($description_available) {
 if ($mode === 'edit') {
     $normal_anchors = array(anchor_add('/app/groups/add'));
     $windows_anchors = array();
+    $plugin_anchors = array();
 } else {
     if ($cache_action) {
         $normal_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
         $windows_anchors = array(anchor_javascript('reload_groups_cache', lang('accounts_reload_cache'), 'high'));
+        $plugin_anchors = array();
     } else {
         $normal_anchors = array();
         $windows_anchors = array();
+        $plugin_anchors = array();
     }
 }
 
@@ -142,7 +145,7 @@ sort($windows_items);
 sort($builtin_items);
 
 ///////////////////////////////////////////////////////////////////////////////
-// Windows groups
+// Normal groups
 ///////////////////////////////////////////////////////////////////////////////
 
 $options['default_rows'] = 25;
@@ -152,6 +155,18 @@ echo summary_table(
     $normal_anchors,
     $headers,
     $normal_items,
+    $options
+);
+
+///////////////////////////////////////////////////////////////////////////////
+// Plug-in groups
+///////////////////////////////////////////////////////////////////////////////
+
+echo summary_table(
+    lang('groups_plugin_groups'),
+    $plugin_anchors,
+    $headers,
+    $plugin_items,
     $options
 );
 
